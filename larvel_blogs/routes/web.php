@@ -10,3 +10,12 @@ Route::get('/', function () {
 
 // Admin Routes
 
+Route::prefix('admin')->name('admin')->group(function (Request $request){
+    Route::middleware([])->group(function(){
+           Route::controller(AuthController::class)->group(function(){
+            Route::get('/login','loginForm')->name(login);
+            Route::get('/forgot-Password')->name(forgot);
+           }
+    );
+    });
+});
