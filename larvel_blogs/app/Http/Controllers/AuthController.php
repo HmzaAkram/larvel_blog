@@ -13,10 +13,12 @@ class AuthController extends Controller
         return view('back.pages.auth.login', $data);
 
     }
-    public function forgotPassword(Request $request){
+   
+    public function forgotPassword(Request $request) {
         $data = [
-            'pageTitle' => 'forgotPassword'
+            'pageTitle' => 'Forgot Password'
         ];
         return view('back.pages.auth.forgot', $data);
     }
+    
 }

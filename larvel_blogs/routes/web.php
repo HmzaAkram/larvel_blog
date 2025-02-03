@@ -1,26 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Http\Controller\AuthController;
-use app\Http\Controller\AdminController;
+use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 // Admin Routes
-
-Route::prefix('admin')->name('admin')->group(function (Request $request){
-    Route::middleware([])->group(function(){
-           Route::controller(AuthController::class)->group(function(){
-            Route::get('/login','loginForm')->name(login);
-            Route::get('/forgotPassword')->name(forgot);
-           }
-    );
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware([])->group(function () {
+        Route::controller(AuthController::class)->group(function () {
+            Route::get('/login', 'loginForm')->name('login');
+            Route::get('/forgotPassword', 'forgotPassword')->name('forgot'); 
+        });
     });
-    Route::middleware([])->group(function(){
-        Route::controller(AdminController::class)->group(function(){
-            Route::get('/dashboard','adminDashboard')->name(dashboard);
-        }); 
+
+    Route::middleware([])->group(function () {
+        Route::controller(AdminController::class)->group(function () {
+            Route::get('/dashboard', 'adminDashboard')->name('dashboard');
+        });
     });
 });
