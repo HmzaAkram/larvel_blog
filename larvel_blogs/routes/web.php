@@ -7,3 +7,6 @@ use app\Http\Controller\AdminController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Admin Routes
+
