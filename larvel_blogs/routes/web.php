@@ -18,4 +18,9 @@ Route::prefix('admin')->name('admin')->group(function (Request $request){
            }
     );
     });
+    Route::middleware([])->group(function(){
+        Route::controller(AdminController::class)->group(function(){
+            Route::get('/dashboard','adminDashboard')->name(dashboard);
+        }); 
+    });
 });
