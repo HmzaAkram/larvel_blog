@@ -10,6 +10,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Teating routes
+Route::view('example-page','example-page');
+Route::view('example-auth','example-auth');
+
+
+
+
+
 // Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware([])->group(function () {
