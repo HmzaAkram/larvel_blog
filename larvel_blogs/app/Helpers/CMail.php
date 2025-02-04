@@ -19,19 +19,18 @@ try {
     $mail->Username   = config('services.mail.username');                     
     $mail->Password   = config('service.mail.password');                       
     $mail->SMTPSecure = config('service.mail.encrption');           
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->Port       = config('service.mail.port');                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('from@example.com', 'Mailer');
-    $mail->addAddress('joe@example.net', 'Joe User');     //Add a recipient
-    $mail->addAddress('ellen@example.com');               //Name is optional
-    $mail->addReplyTo('info@example.com', 'Information');
-    $mail->addCC('cc@example.com');
-    $mail->addBCC('bcc@example.com');
+    $mail->setFrom(
+        isset($config['from_address']) ? $config['from_address'] : config('service.mail.from_address'),
+        isset($config['from_name'])? $config['from_name'] : config('service.mail.from_name')
+    );
+    $mail->addAddress($config['recipient_address'], isset($config['recipient_name']) 
+    ?
+    $config['recipient_name'] : config('service.mail.recipient_name')
 
-    //Attachments
-    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+);     //Add a recipient
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
