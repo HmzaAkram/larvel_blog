@@ -8,7 +8,7 @@
 							<h6 class="mb-20">
 								Enter your email address to reset your password
 							</h6>
-							<form acction="{{ route(''admin.send_password_reset_link)}}" method="POST">
+							<form action="{{ route('admin.send_password_reset_link')}}" method="POST">
                                 <x-form-alerts></x-form-alerts>
                                 @csrf
 								<div class="input-group custom mb-1">
