@@ -22,6 +22,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //redirect an authenticated user to the dashboard
+        RedirectIfAuthenticated::redirectUsing(
+            function(){
+                return route('admin.dashboard');
+            }
+
+        );
+
+        //Redirect non authenticated users to the dashboard
+        Authenticate::redirectUsing(
+            function(){
+                Session::flash('fail','You must be logged in');
+                return route('admin.login');
+            }
+        );
+
+        //Set session lifetime to 1 hour
+        //Session::put('session.lifetime', 60 * 60);
     }
 }
