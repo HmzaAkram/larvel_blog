@@ -18,6 +18,6 @@ class AdminController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login')->with('fail','you are LOGOUT!.');
+        return redirect()->route('admin.login')->with('fail','you are LOGOUT!.');
     }
 }
