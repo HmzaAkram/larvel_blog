@@ -71,7 +71,7 @@ class AuthController extends Controller
                 Auth::logout();
                 $request->session()->invalidate();
                 $request->session()->regenerateToken();
-                return redirect()->route('admin.login')->with('fail','Your account is pending approval. Please, check your e Support at (support@127.0.0.1:8000/) for further Assistance.');
+                return redirect()->route('admin.login')->with('fail','Your account is pending approval. Please, check your email Support at (support@127.0.0.1:8000/) for further Assistance.');
             }
             return redirect()->route('admin.dashboard');
         } else {
