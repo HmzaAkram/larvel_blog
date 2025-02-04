@@ -23,6 +23,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware([])->group(function () {
         Route::controller(AuthController::class)->group(function () {
             Route::get('/login', 'loginForm')->name('login');
+            Route::post('/login', 'loginHandler')->name('login_handler');
             Route::get('/forgotPassword', 'forgotPassword')->name('forgot'); 
         });
     });
