@@ -60,10 +60,21 @@ class AuthController extends Controller
             'password'=>$request->password,
         );
         if (Auth::attempt($creds)) {
-            //return redirect()->intended('dashboard');
-            if(auth()->user())
+            if(auth()->user()->status == UserStatus::Inactive) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect()->route('admin.login')->with('fail','your account is currently inactive. Please, Connect Support at (support@127.0.0.1:8000/)for further Assistance.');
+            }
+            //check if account is pending mode
+            if(auth()->user()->status == UserStatus::Pending) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect()->route('admin.login')->with('fail','Your account is pending approval. Please, check your e Support at (support@127.0.0.1:8000/) for further Assistance.');
+            }
+            return redirect()->route('admin.dashboard');
         } else {
-            // return back()->withErrors(['loginError' => 'Invalid credentials. Please try again.']);
             return redirect()->route('admin.login')->withInput()->with('fail','Incorrect password');
         }
     }
