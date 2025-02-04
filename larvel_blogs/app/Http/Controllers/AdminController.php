@@ -12,4 +12,5 @@ class AdminController extends Controller
         ];
         return view('back.pages.dashboard', $data);
     }
+    
 }
