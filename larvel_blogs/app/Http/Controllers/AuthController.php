@@ -49,7 +49,7 @@ class AuthController extends Controller
                 return $this->logoutWithMessage($request, 'Your account is pending approval. Please check your email for instructions or contact Support at support@127.0.0.1:8000.');
             }
 
-            return redirect()->route('dashboard');
+            return redirect()->route('admin.dashboard');
         }
 
         return redirect()->route('admin.login')->withInput()->with('fail', 'Incorrect password');
