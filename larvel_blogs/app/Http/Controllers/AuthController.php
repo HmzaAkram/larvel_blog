@@ -25,7 +25,25 @@ class AuthController extends Controller
     }
     
     public function loginHandler(Request $request){
-         $fieldType = ilter_var($request->login_id, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-         dd($fieldType);
+         $fieldType = filter_var($request->login_id,FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+         if($fieldType == 'email'){
+            $request->validate([
+                'login_id' => 'required|email|exist:users,email',
+                'password' => 'required|min:5'
+            ],[
+                'login_id.required' =>'Enter Your Email or Username',
+                'login_id.email' =>'Invalid Email Address',
+                'login_id.exists' =>'no account found in this email'
+            ]);
+
+         }else{
+            $request->validate([
+                'login_id' => 'required|exists:users,username',
+                'password' => 'required|min:5'
+            ],[
+                'login_id.required' =>'Enter Your Email or Username',
+                'login_id.exists' =>'no account found in this username'
+            ]);
+         }
     }
 }
