@@ -77,7 +77,8 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        $token = base64_encode(Str::random(64));
+        $token = Hash::make(Str::random(64));
+
 
     //     // Corrected table name to 'password_reset_tokens'
         $oldToken = DB::table('password_reset_tokens')->where('email', $user->email)->first();
