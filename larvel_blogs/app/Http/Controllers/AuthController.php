@@ -117,19 +117,6 @@ class AuthController extends Controller
         else{
             return redirect()->route('admin.forgot')->with('fail','Failed to send password reset link. Please try again.');
         }
-        
-    //     // Using Laravel's Mail facade properly
-    //     try {
-    //         Mail::send([], [], function ($message) use ($user, $mail_body) {
-    //             $message->to($user->email, $user->name)
-    //                     ->subject('Reset Password')
-    //                     ->html($mail_body);
-    //         });
-            
-    //         return redirect()->route('admin.forgot')->with('success', 'Password reset link has been sent to your email address.');
-    //     } catch (\Exception $e) {
-    //         return redirect()->route('admin.forgot')->with('fail', 'Failed to send password reset link. Please try again.');
-    //     }
     }
 
 }
