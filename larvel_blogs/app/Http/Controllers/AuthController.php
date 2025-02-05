@@ -65,10 +65,10 @@ class AuthController extends Controller
         return redirect()->route('admin.login')->with('fail', $message);
     }
 
-    // public function sendPasswordResetLink(Request $request)
-    // {
+     public function sendPasswordResetLink(Request $request)
+    {
     //     $request->validate([
-    //         'email' => ['required', 'email', 'exists:users,email'],
+    //         'email' => ['required|email|exists:users,email'],
     //     ], [
     //         'email.required' => 'Email is required',
     //         'email.email' => 'Invalid email address',
@@ -116,6 +116,6 @@ class AuthController extends Controller
     //     } catch (\Exception $e) {
     //         return redirect()->route('admin.forgot')->with('fail', 'Failed to send password reset link. Please try again.');
     //     }
-    // }
+    }
 
 }
