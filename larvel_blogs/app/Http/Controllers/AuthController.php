@@ -111,8 +111,11 @@ class AuthController extends Controller
            'subject' => 'Reset Password',
             'body' => $mail_body
         );
-        if(){
-            
+        if( CMail::send($mailConfig)){
+            return redirect()->route('admin.forgot')->with('success','Password reset link has been sent to your email address.');
+        }
+        else{
+            return redirect()->route('admin.forgot')->with('fail','Failed to send password reset link. Please try again.');
         }
         
     //     // Using Laravel's Mail facade properly
