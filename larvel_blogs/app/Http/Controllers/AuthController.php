@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\CMail; // Corrected Mail facade import
+use App\Helpers\CMail; // Corrected Mail facade import
 
 class AuthController extends Controller
 {
