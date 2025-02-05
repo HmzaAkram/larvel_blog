@@ -65,64 +65,57 @@ class AuthController extends Controller
         return redirect()->route('admin.login')->with('fail', $message);
     }
 
-    public function sendPasswordResetLink(Request $request)
-    {
-        $request->validate([
-            'email' => ['required', 'email', 'exists:users,email'],
-        ], [
-            'email.required' => 'Email is required',
-            'email.email' => 'Invalid email address',
-            'email.exists' => "No account found with this email",
-        ]);
+    // public function sendPasswordResetLink(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => ['required', 'email', 'exists:users,email'],
+    //     ], [
+    //         'email.required' => 'Email is required',
+    //         'email.email' => 'Invalid email address',
+    //         'email.exists' => "No account found with this email",
+    //     ]);
 
-        $user = User::where('email', $request->email)->first();
+    //     $user = User::where('email', $request->email)->first();
 
-        $token = base64_encode(Str::random(64));
+    //     $token = base64_encode(Str::random(64));
 
-        // Corrected table name to 'password_reset_tokens'
-        $oldToken = DB::table('password_reset_tokens')->where('email', $user->email)->first();
+    //     // Corrected table name to 'password_reset_tokens'
+    //     $oldToken = DB::table('password_reset_tokens')->where('email', $user->email)->first();
         
-        if ($oldToken) {
-            DB::table('password_reset_tokens')->where('email', $user->email)->update([
-                'token' => $token,
-                'created_at' => Carbon::now(),
-            ]);
-        } else {
-            DB::table('password_reset_tokens')->insert([
-                'email' => $user->email,
-                'token' => $token,
-                'created_at' => Carbon::now(),
-            ]);
-        }
+    //     if ($oldToken) {
+    //         DB::table('password_reset_tokens')->where('email', $user->email)->update([
+    //             'token' => $token,
+    //             'created_at' => Carbon::now(),
+    //         ]);
+    //     } else {
+    //         DB::table('password_reset_tokens')->insert([
+    //             'email' => $user->email,
+    //             'token' => $token,
+    //             'created_at' => Carbon::now(),
+    //         ]);
+    //     }
 
-        $actionLink = route('admin.reset_password_from', ['token' => $token]);
+    //     $actionLink = route('admin.reset_password_from', ['token' => $token]);
 
-        $data = array(
-            'actionLink' => $actionLink,
-            'user' => $user
-        );
+    //     $data = array(
+    //         'actionLink' => $actionLink,
+    //         'user' => $user
+    //     );
 
-        $mail_body = view('email-templates.forgot-templates', $data)->render();
+    //     $mail_body = view('email-templates.forgot-templates', $data)->render();
         
-        // Using Laravel's Mail facade properly
-        try {
-            Mail::send([], [], function ($message) use ($user, $mail_body) {
-                $message->to($user->email, $user->name)
-                        ->subject('Reset Password')
-                        ->html($mail_body);
-            });
+    //     // Using Laravel's Mail facade properly
+    //     try {
+    //         Mail::send([], [], function ($message) use ($user, $mail_body) {
+    //             $message->to($user->email, $user->name)
+    //                     ->subject('Reset Password')
+    //                     ->html($mail_body);
+    //         });
             
-            return redirect()->route('admin.forgot')->with('success', 'Password reset link has been sent to your email address.');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.forgot')->with('fail', 'Failed to send password reset link. Please try again.');
-        }
-    }
+    //         return redirect()->route('admin.forgot')->with('success', 'Password reset link has been sent to your email address.');
+    //     } catch (\Exception $e) {
+    //         return redirect()->route('admin.forgot')->with('fail', 'Failed to send password reset link. Please try again.');
+    //     }
+    // }
 
-    public function showResetPasswordForm(Request $request, $token)
-{
-    return view('back.pages.auth.reset', [
-        'pageTitle' => 'Reset Password',
-        'token' => $token
-    ]);
-}
 }
