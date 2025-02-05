@@ -94,11 +94,13 @@ class AuthController extends Controller
             DB::table('password_reset_tokens')->insert([
                 'email' => $user->email,
                 'token' => $token,
-                'created_at' => Carbon::now(),
+                'created_at' => now()
             ]);
         }
 
-       $actionLink = route('admin.reset_password_from', ['token' => $token]);
+       
+       $actionLink = route('admin.reset_password_form', ['token' => $token]);
+
 
      $data = array(
             'actionLink' => $actionLink,
@@ -112,7 +114,7 @@ class AuthController extends Controller
            'subject' => 'Reset Password',
             'body' => $mail_body
         );
-        if( CMail::send($mailConfig)){
+        if( Mail::to($user->email)->send(new ResetPasswordMail($actionLink, $user))        ){
             return redirect()->route('admin.forgot')->with('success','Password reset link has been sent to your email address.');
         }
         else{
