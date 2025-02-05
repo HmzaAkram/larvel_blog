@@ -97,14 +97,23 @@ class AuthController extends Controller
             ]);
         }
 
-    //     $actionLink = route('admin.reset_password_from', ['token' => $token]);
+       $actionLink = route('admin.reset_password_from', ['token' => $token]);
 
-    //     $data = array(
-    //         'actionLink' => $actionLink,
-    //         'user' => $user
-    //     );
+     $data = array(
+            'actionLink' => $actionLink,
+            'user' => $user
+        );
 
-    //     $mail_body = view('email-templates.forgot-templates', $data)->render();
+        $mail_body = view('email-templates.forgot-template', $data)->render();
+        $mailConfig = array(
+            'recipient_address' => $user->email,
+           'recipient_name' => $user->name,
+           'subject' => 'Reset Password',
+            'body' => $mail_body
+        );
+        if(){
+            
+        }
         
     //     // Using Laravel's Mail facade properly
     //     try {
