@@ -75,25 +75,27 @@ class AuthController extends Controller
             'email.exists' => "No account found with this email",
         ]);
 
-    //     $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-    //     $token = base64_encode(Str::random(64));
+        $token = base64_encode(Str::random(64));
 
     //     // Corrected table name to 'password_reset_tokens'
-    //     $oldToken = DB::table('password_reset_tokens')->where('email', $user->email)->first();
+        $oldToken = DB::table('password_reset_tokens')->where('email', $user->email)->first();
         
-    //     if ($oldToken) {
-    //         DB::table('password_reset_tokens')->where('email', $user->email)->update([
-    //             'token' => $token,
-    //             'created_at' => Carbon::now(),
-    //         ]);
-    //     } else {
-    //         DB::table('password_reset_tokens')->insert([
-    //             'email' => $user->email,
-    //             'token' => $token,
-    //             'created_at' => Carbon::now(),
-    //         ]);
-    //     }
+        if ($oldToken) {
+            DB::table('password_reset_tokens')
+                ->where('email', $user->email)->update([
+                'token' => $token,
+                'created_at' => Carbon::now() 
+            ]);
+        }
+     else {
+            DB::table('password_reset_tokens')->insert([
+                'email' => $user->email,
+                'token' => $token,
+                'created_at' => Carbon::now(),
+            ]);
+        }
 
     //     $actionLink = route('admin.reset_password_from', ['token' => $token]);
 
