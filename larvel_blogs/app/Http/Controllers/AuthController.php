@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\UserStatus;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\CMail;
 
 class AuthController extends Controller
 {
@@ -60,5 +65,43 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('admin.login')->with('fail', $message);
+    }//end
+
+    public function sendPasswordResetLink(Request $request){
+        $request->validate([
+            'email' => ['required', 'email', 'exists:users,email'],
+        ], [
+            'email.required' => 'Email is required',
+            'email.email' => 'Invalid email address',
+            'email.exists' => "No account found with this email",
+        ]);
+
+        $user =User::where('email',$request->email)->first();
+
+        $token = base64_encode(str::random(64));
+
+        $oldToken = DB::table('password_reset_token')->where('email',$user->email)->first();
+        if($oldToken){
+            DB::table('password_reset_tokens')->where('email',$user->email)->update([
+                'token' => $token,
+                'created_at' => Carbon::now(),
+            ]);
+        } else {
+            DB::table('password_reset_tokens')->insert([
+                'email' => $user->email,
+                'token' => $token,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+
+        $actionLink = route('admin.reset_password_from',['token' => $token]);
+
+        $data= array(
+            'actionLink'=>$actionLink,
+            'user'=>$user
+        );
+
+        $mail_body = view('email-templates.forgot-templates',$data)->render();
+        $mail
     }
 }
