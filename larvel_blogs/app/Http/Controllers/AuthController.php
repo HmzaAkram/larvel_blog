@@ -67,13 +67,13 @@ class AuthController extends Controller
 
      public function sendPasswordResetLink(Request $request)
     {
-    //     $request->validate([
-    //         'email' => ['required|email|exists:users,email'],
-    //     ], [
-    //         'email.required' => 'Email is required',
-    //         'email.email' => 'Invalid email address',
-    //         'email.exists' => "No account found with this email",
-    //     ]);
+        $request->validate([
+            'email' => ['required','email','exists:users,email'],
+        ], [
+            'email.required' => 'Email is required',
+            'email.email' => 'Invalid email address',
+            'email.exists' => "No account found with this email",
+        ]);
 
     //     $user = User::where('email', $request->email)->first();
 
