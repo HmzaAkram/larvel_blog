@@ -117,4 +117,12 @@ class AuthController extends Controller
             return redirect()->route('admin.forgot')->with('fail', 'Failed to send password reset link. Please try again.');
         }
     }
+
+    public function showResetPasswordForm(Request $request, $token)
+{
+    return view('back.pages.auth.reset', [
+        'pageTitle' => 'Reset Password',
+        'token' => $token
+    ]);
+}
 }
