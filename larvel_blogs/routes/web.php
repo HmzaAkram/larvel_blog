@@ -27,8 +27,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/forgotPassword', 'forgotPassword')->name('forgot');
             Route::post('/send_password_reset_link', 'sendPasswordResetLink')->name('send_password_reset_link');
             Route::get('/Password/reset/{token}', 'resetForm')->name('reset_password_form');
-            Route::get('/admin/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])
-     ->name('admin.reset_password_from');
         });
     });
 
