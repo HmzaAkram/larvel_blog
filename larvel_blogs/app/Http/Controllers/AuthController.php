@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User; // Corrected User model import
 use App\UserStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\CMail;
+use Illuminate\Support\Facades\Mail; // Corrected Mail facade import
 
 class AuthController extends Controller
 {
@@ -25,10 +26,8 @@ class AuthController extends Controller
 
     public function loginHandler(Request $request)
     {
-        // Determine if input is email or username
         $fieldType = filter_var($request->login_id, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        // Validate login credentials
         $request->validate([
             'login_id' => ['required', $fieldType === 'email' ? 'email' : '', "exists:users,$fieldType"],
             'password' => ['required', 'min:5'],
@@ -40,7 +39,6 @@ class AuthController extends Controller
             'password.min' => 'Password must be at least 5 characters',
         ]);
 
-        // Attempt login
         if (Auth::attempt([$fieldType => $request->login_id, 'password' => $request->password])) {
             $user = auth()->user();
 
@@ -65,9 +63,10 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('admin.login')->with('fail', $message);
-    }//end
+    }
 
-    public function sendPasswordResetLink(Request $request){
+    public function sendPasswordResetLink(Request $request)
+    {
         $request->validate([
             'email' => ['required', 'email', 'exists:users,email'],
         ], [
@@ -76,13 +75,15 @@ class AuthController extends Controller
             'email.exists' => "No account found with this email",
         ]);
 
-        $user =User::where('email',$request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-        $token = base64_encode(str::random(64));
+        $token = base64_encode(Str::random(64));
 
-        $oldToken = DB::table('password_reset_token')->where('email',$user->email)->first();
-        if($oldToken){
-            DB::table('password_reset_tokens')->where('email',$user->email)->update([
+        // Corrected table name to 'password_reset_tokens'
+        $oldToken = DB::table('password_reset_tokens')->where('email', $user->email)->first();
+        
+        if ($oldToken) {
+            DB::table('password_reset_tokens')->where('email', $user->email)->update([
                 'token' => $token,
                 'created_at' => Carbon::now(),
             ]);
@@ -94,25 +95,26 @@ class AuthController extends Controller
             ]);
         }
 
-        $actionLink = route('admin.reset_password_from',['token' => $token]);
+        $actionLink = route('admin.reset_password_from', ['token' => $token]);
 
-        $data= array(
-            'actionLink'=>$actionLink,
-            'user'=>$user
+        $data = array(
+            'actionLink' => $actionLink,
+            'user' => $user
         );
 
-        $mail_body = view('email-templates.forgot-templates',$data)->render();
-        $mailConfig=array(
-            'recipient_address' =>$user->email,
-            'recipient_name' =>$user->name,
-            'subject' => 'Reset Password',
-            'body' => $mail_body
-        );
-        if( CMail::send($mailConfig)){
+        $mail_body = view('email-templates.forgot-templates', $data)->render();
+        
+        // Using Laravel's Mail facade properly
+        try {
+            Mail::send([], [], function ($message) use ($user, $mail_body) {
+                $message->to($user->email, $user->name)
+                        ->subject('Reset Password')
+                        ->html($mail_body);
+            });
+            
             return redirect()->route('admin.forgot')->with('success', 'Password reset link has been sent to your email address.');
-        }else{
+        } catch (\Exception $e) {
             return redirect()->route('admin.forgot')->with('fail', 'Failed to send password reset link. Please try again.');
-
         }
     }
 }
