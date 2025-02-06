@@ -65,49 +65,53 @@ class AuthController extends Controller
         return redirect()->route('admin.login')->with('fail', $message);
     }
 
-     public function sendPasswordResetLink(Request $request)
+    public function sendPasswordResetLink(Request $request)
     {
+        // Validate email input
         $request->validate([
-            'email' => ['required','email','exists:users,email'],
+            'email' => ['required', 'email', 'exists:users,email'],
         ], [
             'email.required' => 'Email is required',
             'email.email' => 'Invalid email address',
             'email.exists' => "No account found with this email",
         ]);
-
+    
         $user = User::where('email', $request->email)->first();
-
-        $token = Hash::make(Str::random(64));
-
-
-    //     // Corrected table name to 'password_reset_tokens'
-        $oldToken = DB::table('password_reset_tokens')->where('email', $user->email)->first();
+    
+        // Generate a new reset token
+        $rawToken = Str::random(64);  // Raw token to be sent in email
+        $hashedToken = Hash::make($rawToken);  // Hashed token to be stored
+    
+        // Check if a token already exists for this user
+        $existingToken = DB::table('password_reset_tokens')->where('email', $user->email)->first();
         
-        if ($oldToken) {
+        if ($existingToken) {
             DB::table('password_reset_tokens')
-                ->where('email', $user->email)->update([
-                'token' => $token,
-                'created_at' => Carbon::now() 
-            ]);
-        }
-     else {
+                ->where('email', $user->email)
+                ->update([
+                    'token' => $hashedToken,  // Store hashed token
+                    'created_at' => now()
+                ]);
+        } else {
             DB::table('password_reset_tokens')->insert([
                 'email' => $user->email,
-                'token' => $token,
+                'token' => $hashedToken,  // Store hashed token
                 'created_at' => now()
             ]);
         }
-
-       
-       $actionLink = route('admin.reset_password_form', ['token' => $token]);
-
-
-     $data = array(
+    
+        // Generate password reset link with raw token
+        $actionLink = route('admin.reset_password_form', ['token' => $rawToken, 'email' => $user->email]);
+    
+        $data = [
             'actionLink' => $actionLink,
             'user' => $user
-        );
+        ];
         
+        // Render email template
         $CMail_body = view('email-templates.forgot-template', $data)->render();
+        
+        // Email configuration
         $CMailConfig = [
             'recipient_address' => $user->email,
             'recipient_name' => $user->name,
@@ -115,14 +119,14 @@ class AuthController extends Controller
             'body' => $CMail_body
         ];
         
+        // Send email
         if (CMail::sendEmail($CMailConfig)) {
             return redirect()->route('admin.forgot')->with('success', 'Password reset link has been sent to your email address.');
         } else {
+            Log::error("Failed to send password reset email to: {$user->email}");
             return redirect()->route('admin.forgot')->with('fail', 'Failed to send password reset link. Please try again.');
         }
-        
     }
-
     public function resetForm(Request $request, $token = null) {
         dd($token);
 
