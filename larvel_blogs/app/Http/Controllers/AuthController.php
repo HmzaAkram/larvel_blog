@@ -106,20 +106,20 @@ class AuthController extends Controller
             'actionLink' => $actionLink,
             'user' => $user
         );
-
-        $mail_body = view('email-templates.forgot-template', $data)->render();
-        $mailConfig = array(
-            'recipient_address' => $user->email,
-           'recipient_name' => $user->name,
-           'subject' => 'Reset Password',
-            'body' => $mail_body
-        );
-        if( Mail::to($user->email)->send(new ResetPasswordMail($actionLink, $user))        ){
-            return redirect()->route('admin.forgot')->with('success','Password reset link has been sent to your email address.');
-        }
-        else{
-            return redirect()->route('admin.forgot')->with('fail','Failed to send password reset link. Please try again.');
-        }
+        return redirect()->route('admin.forgot')->with('success','Password reset link has been sent to your email address.');
+        // $mail_body = view('email-templates.forgot-template', $data)->render();
+        // $mailConfig = array(
+        //     'recipient_address' => $user->email,
+        //    'recipient_name' => $user->name,
+        //    'subject' => 'Reset Password',
+        //     'body' => $mail_body
+        // );
+        // if( CMail::to($user->email)->send(new ResetPasswordMail($actionLink, $user))        ){
+        //     return redirect()->route('admin.forgot')->with('success','Password reset link has been sent to your email address.');
+        // }
+        // else{
+        //     return redirect()->route('admin.forgot')->with('fail','Failed to send password reset link. Please try again.');
+        // }
     }
 
 }
