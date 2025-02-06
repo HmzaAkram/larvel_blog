@@ -120,6 +120,6 @@ class AuthController extends Controller
     //     else{
     //         return redirect()->route('admin.forgot')->with('fail','Failed to send password reset link. Please try again.');
     //     }
-    // }
+    }
 
 }
