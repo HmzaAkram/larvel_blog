@@ -123,4 +123,10 @@ class AuthController extends Controller
         
     }
 
+    public function resetForm(Request $request, $token = null) {
+        dd($token);
+
+    }
+
+
 }
