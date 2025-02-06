@@ -106,9 +106,9 @@ class AuthController extends Controller
             'actionLink' => $actionLink,
             'user' => $user
         );
-        return redirect()->route('admin.forgot')->with('success','Password reset link has been sent to your email address.');
-        // $mail_body = view('email-templates.forgot-template', $data)->render();
-        // $mailConfig = array(
+        
+        // $CMail_body = view('email-templates.forgot-template', $data)->render();
+        // $CMailConfig = array(
         //     'recipient_address' => $user->email,
         //    'recipient_name' => $user->name,
         //    'subject' => 'Reset Password',
