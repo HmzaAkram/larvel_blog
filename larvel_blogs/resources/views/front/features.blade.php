@@ -1,4 +1,4 @@
-
+@yeaid('header')
       <!-- recent section start --> 
       <div class="about_section layout_padding">
          <div class="container">
@@ -47,4 +47,4 @@
          </div>
       </div>
       <!-- recent section end --> 
-     
+      @yeaid('footer')

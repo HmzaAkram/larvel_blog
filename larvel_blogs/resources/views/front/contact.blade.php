@@ -1,4 +1,4 @@
-
+@yeaid('header')
       <!-- contact section start -->
       <div class="contact_section layout_padding">
          <div class="container">
@@ -41,4 +41,4 @@
          </div>
       </div>
       <!-- contact section end -->
-     
+      @yeaid('footer')

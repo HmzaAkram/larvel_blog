@@ -10,6 +10,7 @@ Route::get('/', function () {
     return view('front.index');
 });
 
+
 // Teating routes
 Route::view('example-page','example-page');
 Route::view('example-auth','example-auth');

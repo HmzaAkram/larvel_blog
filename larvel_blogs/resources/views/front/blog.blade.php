@@ -1,4 +1,4 @@
-
+@yeaid('header')
       <!-- blog section start --> 
       <div class="about_section layout_padding">
          <div class="container">
@@ -37,4 +37,4 @@
          </div>
       </div>
       <!-- blog section end --> 
-      
+      @yeaid('footer')
