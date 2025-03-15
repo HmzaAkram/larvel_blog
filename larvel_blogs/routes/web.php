@@ -27,7 +27,7 @@ Route::get('/blog', function () {
 });
 
 Route::get('/login', function () {
-    return view('front.pages.login');
+    return view('front.pages.auth.login');
 });
 
 // Teating routes
