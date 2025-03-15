@@ -1,4 +1,7 @@
-@yeaid('header')
+@extends('layouts.app')
+
+@section('title', 'About Us')
+@section('content')
       <!-- about section start --> 
       <div class="about_section layout_padding">
          <div class="container">
@@ -30,4 +33,4 @@
          </div>
       </div>
       <!-- about section end -->
-      @yeaid('footer')
+      @endsection

@@ -10,6 +10,21 @@ Route::get('/', function () {
     return view('front.index');
 });
 
+Route::get('/about', function () {
+    return view('front.about');
+});
+
+Route::get('/contact', function () {
+    return view('front.contact');
+});
+
+Route::get('/features', function () {
+    return view('front.features');
+});
+
+Route::get('/blog', function () {
+    return view('front.blog');
+});
 
 // Teating routes
 Route::view('example-page','example-page');

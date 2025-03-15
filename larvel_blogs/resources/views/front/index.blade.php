@@ -1,4 +1,8 @@
-@yeaid('header')
+@extends('layouts.app')
+
+@section('title', 'Home page')
+
+@section('content')
       <!-- about section start --> 
       <div class="about_section layout_padding">
          <div class="container">
@@ -218,4 +222,4 @@
          </div>
       </div>
       <!-- contact section end -->
-     @yeaid('footer')
+      @endsection
