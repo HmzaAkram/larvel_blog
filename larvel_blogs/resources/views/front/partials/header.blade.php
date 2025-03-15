@@ -12,7 +12,7 @@
                <li class="nav-item"><a class="nav-link" href="{{ url('/blog') }}">Blog</a></li>
                <li class="nav-item"><a class="nav-link" href="{{ url('/features') }}">Features</a></li>
                <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact Us</a></li>
-               <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+               <li class="nav-item"><a class="nav-link" href="{{ url('/login') }}">Login</a></li>
                <li class="nav-item"><a class="nav-link" href="#"><img src="/front/images/serach-icon.png"></a></li>
             </ul>
          </div>

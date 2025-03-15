@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 
-
+//user routes
 Route::get('/', function () {
     return view('front.pages.index');
 });
