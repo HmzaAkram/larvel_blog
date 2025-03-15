@@ -59,5 +59,5 @@
 								</div>
 							</form>
 						</div>
-
+    
 @endsection
