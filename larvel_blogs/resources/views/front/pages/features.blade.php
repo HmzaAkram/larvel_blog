@@ -1,4 +1,7 @@
-@yeaid('header')
+@extends('front.layout.app')
+
+@section('title', 'Features')
+@section('content')
       <!-- recent section start --> 
       <div class="about_section layout_padding">
          <div class="container">
@@ -47,4 +50,4 @@
          </div>
       </div>
       <!-- recent section end --> 
-      @yeaid('footer')
+      @endsection

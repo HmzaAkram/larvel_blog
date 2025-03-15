@@ -1,4 +1,7 @@
-@yeaid('header')
+@extends('front.layout.app')
+
+@section('title', 'contact')
+@section('content')
       <!-- contact section start -->
       <div class="contact_section layout_padding">
          <div class="container">
@@ -41,4 +44,4 @@
          </div>
       </div>
       <!-- contact section end -->
-      @yeaid('footer')
+      @endsection

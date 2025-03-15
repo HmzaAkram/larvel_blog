@@ -1,4 +1,7 @@
-@yeaid('header')
+@extends('front.layout.app')
+
+@section('title', 'Blogs')
+@section('content')
       <!-- blog section start --> 
       <div class="about_section layout_padding">
          <div class="container">
@@ -37,4 +40,4 @@
          </div>
       </div>
       <!-- blog section end --> 
-      @yeaid('footer')
+      @endsection
