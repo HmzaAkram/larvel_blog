@@ -7,7 +7,7 @@ use App\Http\Controllers\AdminController;
 
 
 Route::get('/', function () {
-    return view('front.index');
+    return view('front.pages.index');
 });
 
 Route::get('/about', function () {

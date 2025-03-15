@@ -1,4 +1,4 @@
-<!-- @extends('layout.app')
+@extends('layout.app')
 
 @section('title', 'Home page')
 
@@ -222,4 +222,4 @@
          </div>
       </div>
       <!-- contact section end -->
-      @endsection -->
+      @endsection
