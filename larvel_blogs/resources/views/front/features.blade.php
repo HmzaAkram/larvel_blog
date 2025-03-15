@@ -4,17 +4,17 @@
          <div class="container">
             <div class="row">
                <div class="col-lg-8 col-sm-12">
-                  <div class="about_img"><img src="images/img-10.png"></div>
-                  <div class="like_icon"><img src="images/like-icon.png"></div>
+                  <div class="about_img"><img src="/front/images/img-10.png"></div>
+                  <div class="like_icon"><img src="/front/images/like-icon.png"></div>
                   <p class="post_text">Post By : 09/06/2019</p>
                   <h2 class="most_text">Most Awesome Blue Lake With Snow <br>foreste</h2>
                   <p class="lorem_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis</p>
                   <div class="social_icon_main">
                      <div class="social_icon">
                         <ul>
-                           <li><a href="#"><img src="images/fb-icon.png"></a></li>
-                           <li><a href="#"><img src="images/twitter-icon.png"></a></li>
-                           <li><a href="#"><img src="images/instagram-icon.png"></a></li>
+                           <li><a href="#"><img src="/front/images/fb-icon.png"></a></li>
+                           <li><a href="#"><img src="/front/images/twitter-icon.png"></a></li>
+                           <li><a href="#"><img src="/front/images/instagram-icon.png"></a></li>
                         </ul>
                      </div>
                      <div class="read_bt"><a href="#">Read More</a></div>
@@ -25,7 +25,7 @@
                      <h1 class="recent_taital">Recent post</h1>
                      <div class="recent_box">
                         <div class="recent_left">
-                           <div class="image_6"><img src="images/img-6.png"></div>
+                           <div class="image_6"><img src="/front/images/img-6.png"></div>
                         </div>
                         <div class="recent_right">
                            <h3 class="consectetur_text">Consectetur adipiscing</h3>
@@ -34,7 +34,7 @@
                      </div>
                      <div class="recent_box">
                         <div class="recent_left">
-                           <div class="image_6"><img src="images/img-7.png"></div>
+                           <div class="image_6"><img src="/front/images/img-7.png"></div>
                         </div>
                         <div class="recent_right">
                            <h3 class="consectetur_text">Consectetur adipiscing</h3>
