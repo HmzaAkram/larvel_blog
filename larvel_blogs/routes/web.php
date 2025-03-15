@@ -26,6 +26,10 @@ Route::get('/blog', function () {
     return view('front.pages.blog');
 });
 
+Route::get('/login', function () {
+    return view('front.pages.login');
+});
+
 // Teating routes
 Route::view('example-page','example-page');
 Route::view('example-auth','example-auth');
