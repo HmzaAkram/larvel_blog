@@ -11,19 +11,19 @@ Route::get('/', function () {
 });
 
 Route::get('/about', function () {
-    return view('front.about');
+    return view('front.pages.about');
 });
 
 Route::get('/contact', function () {
-    return view('front.contact');
+    return view('front.pages.contact');
 });
 
 Route::get('/features', function () {
-    return view('front.features');
+    return view('front.pages.features');
 });
 
 Route::get('/blog', function () {
-    return view('front.blog');
+    return view('front.pages.blog');
 });
 
 // Teating routes
