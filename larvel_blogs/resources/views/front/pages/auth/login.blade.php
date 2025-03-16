@@ -34,9 +34,11 @@
                   <div class="mail_section">
                   <form action="{{  route('admin.login_handler')  }}" method="POST">
                   <x-form-alerts></x-form-alerts>
+                  @csrf
+                  <input type="" class="email_text" placeholder="Name" name="Name">
 </form>
                      <!-- <h1 class="contact_taital">Login</h1>
-                     <input type="" class="email_text" placeholder="Name" name="Name">
+                     
                      <input type="" class="email_text" placeholder="Phone" name="Phone">
                      <input type="" class="email_text" placeholder="Email" name="Email">
                      <textarea class="massage_text" placeholder="Message" rows="5" id="comment" name="Message"></textarea>
