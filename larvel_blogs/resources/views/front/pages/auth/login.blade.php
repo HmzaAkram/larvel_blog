@@ -41,6 +41,9 @@
                   <span class="text danger ml-1"> {{$message}} </span>
                   @enderror
                   <input type="password" class="email_text" placeholder="**********" name="password">
+                  @error('password')
+                  <span class="text danger ml-1"> {{$message}} </span>
+                  @enderror
 
 </form>
                      <!-- 
