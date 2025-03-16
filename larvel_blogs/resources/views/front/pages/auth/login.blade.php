@@ -35,7 +35,7 @@
                   <form action="{{  route('admin.login_handler')  }}" method="POST">
                   <x-form-alerts></x-form-alerts>
                   @csrf
-                  <input type="" class="email_text" placeholder="Name" name="Name">
+                  <input type="" class="email_text" placeholder="Username / Email" name="Name">
 </form>
                      <!-- <h1 class="contact_taital">Login</h1>
                      
