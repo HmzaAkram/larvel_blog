@@ -38,6 +38,10 @@
                   @csrf
                   <input type="" class="email_text" placeholder="Username / Email" name="login_id" value="{{ old('login_id') }}">
                   @error('login_id')
+                  <span class="text danger ml-1"> {{$message}} </span>
+                  @enderror
+                  <input type="password" class="email_text" placeholder="**********" name="password">
+
 </form>
                      <!-- 
                      
