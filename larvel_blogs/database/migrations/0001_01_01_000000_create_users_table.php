@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('picture')->nullable();
             $table->text('bio')->nullable();
-            $table->enum('type', ['admin', 'superadmin', 'user'])->default('user'); // Enforce values
-            $table->enum('status', ['pending', 'active', 'banned'])->default('pending'); // Enforce values
+            $table->enum('type', ['admin', 'superadmin', 'user'])->default('user');
+$table->enum('status', ['pending', 'active', 'banned'])->default('pending');
             $table->rememberToken();
             $table->timestamps();
         });
