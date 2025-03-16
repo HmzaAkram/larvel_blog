@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('username')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('picture')->nullable();
-            $table->text('bio')->nullable();
-            $table->enum('type', ['admin', 'superadmin', 'user'])->default('user');
-$table->enum('status', ['pending', 'active', 'banned'])->default('pending');
-            $table->rememberToken();
-            $table->timestamps();
-        });
-        
+       Schema::create('users', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->string('email')->unique();
+    $table->string('username')->unique();
+    $table->timestamp('email_verified_at')->nullable();
+    $table->string('password');
+    $table->string('picture')->nullable();
+    $table->text('bio')->nullable();
+    $table->UserType('type', ['admin', 'superadmin', 'user'])->default('user'); // Enforce values
+    $table->UserStatus('status', ['pending', 'active', 'banned'])->default('pending'); // Enforce values
+    $table->rememberToken();
+    $table->timestamps();
+});
+
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
