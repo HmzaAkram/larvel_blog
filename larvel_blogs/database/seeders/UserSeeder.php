@@ -1,14 +1,9 @@
 <?php
-
 namespace Database\Seeders;
 
-
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\UserType;
-use App\UserStatus;
 
 class UserSeeder extends Seeder
 {
@@ -20,11 +15,19 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-            'password' => Hash::make('12345'),
+            'password' => Hash::make('securePassword123'),
             'username' => 'admin',
-            'type' => UserType::SuperAdmin->value, 
-            'status' => UserStatus::Active->value,
+            'type' => 'superadmin', // Use string values if enums are not defined
+            'status' => 'active',
+        ]);
+
+        User::create([
+            'name' => 'Hmza',
+            'email' => 'hmza@gmail.com',
+            'password' => Hash::make('securePassword123'),
+            'username' => 'hmza', // Unique username
+            'type' => 'user',
+            'status' => 'active',
         ]);
     }
 }
-

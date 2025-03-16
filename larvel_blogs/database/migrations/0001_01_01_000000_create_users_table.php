@@ -19,13 +19,13 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('picture')->nullable();
-            $table->string('bio')->nullable();
-            $table->string('type')->default('admin');
-            $table->string('status')->default('pending');
+            $table->text('bio')->nullable();
+            $table->enum('type', ['admin', 'superadmin', 'user'])->default('user'); // Enforce values
+            $table->enum('status', ['pending', 'active', 'banned'])->default('pending'); // Enforce values
             $table->rememberToken();
             $table->timestamps();
         });
-
+        
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
