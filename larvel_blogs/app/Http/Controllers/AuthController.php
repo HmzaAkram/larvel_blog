@@ -28,7 +28,7 @@ class AuthController extends Controller
     public function loginHandler(Request $request)
     {
         $fieldType = filter_var($request->login_id, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
+    
         $request->validate([
             'login_id' => ['required', $fieldType === 'email' ? 'email' : '', "exists:users,$fieldType"],
             'password' => ['required', 'min:5'],
@@ -39,25 +39,33 @@ class AuthController extends Controller
             'password.required' => 'Password is required',
             'password.min' => 'Password must be at least 5 characters',
         ]);
-
+    
         if (Auth::attempt([$fieldType => $request->login_id, 'password' => $request->password])) {
             $user = auth()->user();
-
+    
             if ($user->status == UserStatus::Inactive) {
                 Auth::logout();
-                return $this->logoutWithMessage($request, 'Your account is currently inactive. Please contact Support at support@127.0.0.1:8000 for assistance.');
+                return $this->logoutWithMessage($request, 'Your account is currently inactive. Please contact Support.');
             }
-
+    
             if ($user->status == UserStatus::Pending) {
                 Auth::logout();
-                return $this->logoutWithMessage($request, 'Your account is pending approval. Please check your email for instructions or contact Support at support@127.0.0.1:8000.');
+                return $this->logoutWithMessage($request, 'Your account is pending approval. Please check your email.');
             }
-
-            return redirect()->route('admin.dashboard');
+    
+            // ✅ Admins ko admin panel bhejna
+            if ($user->type === 'superadmin' || $user->type === 'admin') {
+                return redirect()->route('admin.dashboard');
+            } 
+            // ✅ Normal users ko unke dashboard bhejna
+            else {
+                return redirect()->route('user.dashboard');
+            }
         }
-
+    
         return redirect()->route('admin.login')->withInput()->with('fail', 'Incorrect password');
     }
+    
 
     private function logoutWithMessage(Request $request, $message)
     {

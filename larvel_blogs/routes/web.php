@@ -30,6 +30,12 @@ Route::get('/login', function () {
     return view('front.pages.auth.login');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('front.pages.dashboard'); // Ye aapka user ka dashboard hoga
+    })->name('user.dashboard');
+});
+
 // Teating routes
 Route::view('example-page','example-page');
 Route::view('example-auth','example-auth');
