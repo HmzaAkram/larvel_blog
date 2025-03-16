@@ -32,12 +32,13 @@
                </div>
                <div class="col-md-6">
                   <div class="mail_section">
+                  <h1 class="contact_taital">Login</h1>
                   <form action="{{  route('admin.login_handler')  }}" method="POST">
                   <x-form-alerts></x-form-alerts>
                   @csrf
                   <input type="" class="email_text" placeholder="Username / Email" name="login_id" value="{{ old('login_id') }}">
 </form>
-                     <!-- <h1 class="contact_taital">Login</h1>
+                     <!-- 
                      
                      <input type="" class="email_text" placeholder="Phone" name="Phone">
                      <input type="" class="email_text" placeholder="Email" name="Email">
