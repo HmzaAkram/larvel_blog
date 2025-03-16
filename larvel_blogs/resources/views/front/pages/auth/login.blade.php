@@ -44,7 +44,7 @@
                   @error('password')
                   <span class="text danger ml-1"> {{$message}} </span>
                   @enderror
-                  <input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
+                  <input class="send_bt" type="submit" value="Sign In">
 
 </form>
                      <!-- 
