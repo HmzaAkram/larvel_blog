@@ -14,10 +14,10 @@ class AdminController extends Controller
         return view('back.pages.dashboard', $data);
     }
 
-    public function logoutHandler(Request $request){
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('admin.login')->with('fail','you are LOGOUT!.');
-    }
+    // public function logoutHandler(Request $request){
+    //     Auth::logout();
+    //     $request->session()->invalidate();
+    //     $request->session()->regenerateToken();
+    //     return redirect()->route('admin.login')->with('fail','you are LOGOUT!.');
+    // }
 }
