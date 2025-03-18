@@ -17,7 +17,7 @@ class AuthController extends Controller
 {
     public function loginForm(Request $request)
     {
-        return view('back.pages.auth.login', ['pageTitle' => 'Login']);
+        return view('front.pages.auth.login', ['pageTitle' => 'Login']);
     }
 
     public function forgotPassword(Request $request)
@@ -71,7 +71,7 @@ class AuthController extends Controller
     {
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('admin.login')->with('fail', $message);
+        return redirect()->route('login')->with('fail', $message);
     }
 
     public function sendPasswordResetLink(Request $request)
