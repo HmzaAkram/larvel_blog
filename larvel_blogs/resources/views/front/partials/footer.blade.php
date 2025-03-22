@@ -16,7 +16,7 @@
             <li><a href="#"><img src="/front/images/call-icon.png"></a></li>
             <li><a href="#">Call: +01 1234567890</a></li>
             <li><a href="blog.html"><img src="/front/images/mail-icon.png"></a></li>
-            <li><a href="features.html">ha8028377@gmail.com@gmail.com</a></li>
+            <li><a href="features.html">Blog@gmail.com@gmail.com</a></li>
          </ul>
       </div>
    </div>
